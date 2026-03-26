@@ -1,0 +1,96 @@
+#!/bin/bash
+# this is comment
+
+# echo "$0 $1 $2"
+#echo "my name:"
+#read name
+#echo "name is $name"
+#<<comment
+#echo "$1"
+#echo "$2"
+#echo "$0"
+#comment
+
+#<<comment
+##echo "$(ls)"
+##echo "$(whoami)"
+#echo "----------------------------------------------------------------"
+#echo "$(ping -c 1 $1)"
+#echo "----------------------------------------------------------------"
+#comment
+
+<<comment
+echo "enter no"
+read num
+
+##if [ "$name" == "ali" ] && [ "$name" == "ALI" ] 
+if [ "$num" -ge "10" ] && [ "$num" -le "20" ]
+then
+    echo "ok"
+    echo "number is $num" 
+else
+    echo "not ok"
+fi
+comment
+
+<<comment
+echo "enter username:"
+read username
+
+if [ "$username" == "root" ]
+then
+    echo "status: admin rights confirmed. Proceed with system scan."
+else
+    echo "status: standard user detected. permission denied."
+fi
+comment
+
+##<<comment
+##echo "enter $1 and $2: "
+##riskscore = $(($1 + $2))
+##echo "risk score: $rickscore"
+
+##if [ $riskscore -gt 8]
+##then
+  ##  echo "critical risk!
+##else
+##comment
+
+<<comment
+echo "target IP: and tool name:"
+read IP
+read tool
+
+echo "target IP: $1 and tool name: $2"
+if [ "$1" == "10.0.0.5" ] && [ "$2" == "nmap" ]
+then
+    echo "engagment authorized. initiaing scan."
+else
+    echo "warning!"
+fi
+comment
+
+
+for i in {1..10}
+do
+    echo "performing scan 192.168.10.$i"
+done
+echo "----------------------------------------------------------------"
+for i in 80 443 8080 5555
+do 
+    echo "port is $i"
+done
+echo "----------------------------------------------------------------"
+j=1
+while [ $j -le 10 ]
+do
+    echo "value of j is $j"
+    j=$((j+1))
+done
+echo "----------------------------------------------------------------"
+for k in {5..1}
+do
+    echo "execution in: "
+else
+    echo "payload delivered"
+done
