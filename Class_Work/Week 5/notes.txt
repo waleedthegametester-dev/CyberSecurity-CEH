@@ -1,0 +1,9 @@
+PPP topic presentation given on 27.03.26 
+Topics include 
+
+1. data link layer standard way
+2. Connections
+3. Used in different physical networks 
+4. Former example dial up connection 
+5. Explained PPP components 
+6. PPP of Issues 
