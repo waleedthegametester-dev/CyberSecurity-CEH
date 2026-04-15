@@ -1,0 +1,20 @@
+docker search kali 
+image ka naam copy kerna
+
+docker pull <image name>
+
+docker images
+
+docker run -it <images id>
+
+exit
+
+to check container id 
+docker ps -a
+
+docker stop  <container id>
+
+docker rm <container id>
+docker rmi a3849f99f9f1pd
+
+crest uk 
