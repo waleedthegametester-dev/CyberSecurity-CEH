@@ -1,0 +1,138 @@
+linux Scenario Challenge
+
+
+Scenario 1 – Company File Organization
+You are a system administrator setting up directories for a new company project.
+Tasks
+1. Create a directory called company.
+2. Inside it create three directories:
+hr
+finance
+it
+3. Go inside the hr directory.
+4. Create files:
+employees.txt
+salaries.txt
+5. Write the following lines inside employees.txt:
+Ali
+Sara
+Ahmed
+6. Display the contents of the file.
+
+# 1 & 2. Create the company directory and subdirectories
+mkdir -p company/hr company/finance company/it
+
+# 3. Go inside the hr directory
+cd company/hr
+
+# 4. Create files
+touch employees.txt salaries.txt
+
+# 5. Write lines inside employees.txt
+echo -e "Ali\nSara\nAhmed" > employees.txt
+
+# 6. Display the contents
+cat employees.txt
+
+
+Scenario 2 – Searching Important Data
+Your boss wants to know if Ahmed is in the employees list.
+Tasks
+1. Search for the word Ahmed in employees.txt.
+2. Count how many lines exist in employees.txt.
+3. Display only the first line of the file.
+
+# 1. Search for Ahmed
+grep "Ahmed" employees.txt
+
+# 2. Count lines in the file
+wc -l employees.txt
+
+# 3. Display only the first line
+head -n 1 employees.txt
+
+
+
+Scenario 3 – Backup Operation
+Before editing files, you must create backups.
+
+Tasks
+1. Create a folder called backup inside company.
+2. Copy the file employees.txt into the backup folder.
+3. Verify the copy exists in backup.
+
+# 1. Create backup folder (assuming you are still in company/hr)
+mkdir ../backup
+
+# 2. Copy the file
+cp employees.txt ../backup/
+
+# 3. Verify the copy
+ls ../backup/
+
+Scenario 4 – File Permissions
+The salaries.txt file should only be readable by the owner.
+Tasks
+1. Add the text
+Confidential Salary Data
+into salaries.txt.
+2. Change permissions so:
+o Owner: read &amp; write
+o Group: no access
+o Others: no access
+3. Verify the permission change.
+
+# 1. Add confidential text
+echo "Confidential Salary Data" > salaries.txt
+
+# 2. Change permissions (Owner=rw (6), Group=none (0), Others=none (0))
+chmod 600 salaries.txt
+
+# 3. Verify permissions
+ls -l salaries.txt
+
+Scenario 5 – System Log Analysis
+Create a log file and analyze it.
+Tasks
+Create server.log with the following content:
+login success
+login failed
+disk error
+login success
+network error
+Now:
+1. Display the file.
+2. Count how many times the word login appears.
+3. Show only the lines containing error.
+
+# Create the log file
+echo -e "login success\nlogin failed\ndisk error\nlogin success\nnetwork error" > server.log
+
+# 1. Display the file
+cat server.log
+
+# 2. Count occurrences of "login"
+grep -c "login" server.log
+
+# 3. Show lines containing "error"
+grep "error" server.log
+
+
+Scenario 6 – Power User Challenge
+
+Without creating files one by one:
+1. Create 10 files at once named:
+test1.txt to test10.txt
+2. Move all test files into a folder called tests.
+3. Display the directory tree structure.
+
+# 1. Create 10 files at once using brace expansion
+touch test{1..10}.txt
+
+# 2. Move files into a folder called tests
+mkdir tests
+mv test*.txt tests/
+
+# 3. Display the directory tree structure
+# Note: If the 'tree' command isn't installed, use 'ls -R'
+tree
