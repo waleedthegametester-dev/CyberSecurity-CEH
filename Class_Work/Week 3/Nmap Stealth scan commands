@@ -1,0 +1,10 @@
+Stealth scan commands
+nmap -sS
+nmap -sC
+nmap --script = default means system expoloit in safeway 
+nmap --script = vuln means direct system exploit and server down
+nmap -sV  means ports ka version de ga
+nmap -sON means output normal mode csv, gruable txt file
+nmap -sOA means normal all file bana kay de ga normal, csv, gruable
+nmap -A means aggresive scan but not reccommended.
+sudo nmap -p- --min-rate=1000 -T4 -sS -n -Pn 192.168.128.2
