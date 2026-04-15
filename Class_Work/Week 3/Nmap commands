@@ -1,0 +1,24 @@
+ip ifconfig
+connectivity ping two way
+scanning nmap [ip]
+nmap 192.168.10.1n
+nmap 192.168.1.*
+nmap 192.168.1.1/24
+nmap 192.168.1.0-255
+
+nmap switches
+nmap -p 80, 443, 5555, 440-444
+nmap -p 0-65535 [ip]
+nmap -p- means all ports 
+nmap -p- 192.168.*.*
+nmap --top-ports=50 means scan top ports 
+nmap -n 
+nmap -pn
+nmap -p- -n -Pn 192.168.*.*
+nmap -T 1,2,3,4,5
+nmap --min-rate=1000
+nmap --min-rate=1000 -T4-n-Pn 192.168.*.*
+
+nmap flags
+-O
+nmap --min-rate=1000 -T4-n-Pn -O 192.168.*.*
