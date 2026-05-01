@@ -1,0 +1,72 @@
+Week 6 Lab TaskNetwork Sniffing
+NIAI NAVTTC — Certified Ethical Hacker (CEH) Course
+Task Part 1: A small business is experiencing network connectivity problems causing disruptions to their operations. Use sniffing techniques to diagnose the root cause and propose solutions.
+Task Part 2: Conduct a wireless security assessment for a client's premises. Identify any unauthorized or hidden wireless networks that could pose security risks.
+
+PART 1 — Network Sniffing (Diagnose Connectivity Issues)
+▶  Set Up Your Lab Network
+    Make sure Kali Linux and Metasploitable 2 are running on the same Host-Only network.
+    Both machines should be able to ping each other before you start.
+    Note your Kali IP (ifconfig) and Metasploitable IP — you will need these.
+▶  Capture Traffic with Wireshark (GUI)
+    Open Wireshark from Kali Applications → Sniffing & Spoofing → Wireshark.
+    Select your network interface (usually eth0 or the Host-Only adapter).
+    Click the blue shark-fin Start button to begin capturing.
+    Generate some traffic: open a browser, ping Metasploitable, browse its web server.
+    Stop the capture after 1-2 minutes.
+▶  Analyse the Capture in Wireshark
+    Use the filter bar at the top to isolate specific traffic:
+http                    # Show only HTTP traffic
+tcp                     # Show only TCP packets
+icmp                    # Show only ping packets
+ip.addr == 192.168.x.x  # Filter by specific IP address
+    Look for: retransmissions (sign of packet loss), connection resets (RST flags), slow responses, or unusual protocols.
+    Right-click any TCP stream → Follow → TCP Stream to read full conversation.
+▶  Capture Traffic with tcpdump (Command Line)
+    Open a terminal in Kali and run:
+sudo tcpdump -i eth0                          # Capture all traffic
+sudo tcpdump -i eth0 -w capture.pcap          # Save to file
+sudo tcpdump -i eth0 host 192.168.56.101      # Filter by host
+sudo tcpdump -i eth0 port 80                  # Filter by port
+wireshark capture.pcap                        # Open saved capture in Wireshark
+    Now capture traffic in Wireshark while the MitM is active. You will see both sides of the conversation.
+    When done, stop arpspoof and reset ip_forward to 0.
+
+
+▶  Diagnose & Document Findings
+    Based on your packet capture, write a diagnosis report:
+Protocols Observed on the Network
+During packet capture using Wireshark/tcpdump, the following protocols were observed:
+•	ICMP (Internet Control Message Protocol):
+Used for network connectivity testing (ping requests and replies between Kali and Metasploitable). 
+•	TCP (Transmission Control Protocol):
+Used for establishing reliable communication sessions between client and server. 
+•	HTTP (Hypertext Transfer Protocol):
+Used for web traffic communication on port 80
+
+        - What protocols were seen on the network?
+Presence of Plaintext Credentials / Sensitive Data
+Upon inspecting HTTP traffic using “Follow TCP Stream”:
+•	User data (such as login credentials) was transmitted in plaintext format. 
+•	Example observed pattern:
+username=admin
+password=admin
+
+        - Were any credentials or sensitive data visible in plaintext?
+Based on packet analysis, the potential causes include:
+•	Packet loss indicated by TCP retransmissions 
+•	TCP connection resets (RST flags), suggesting unstable sessions or service interruptions 
+•	Possible server-side service instability or overload on Metasploitable 
+•	Insecure protocol usage (HTTP instead of HTTPS), exposing communication vulnerabilities
+
+        - What is the likely root cause of the connectivity problem?
+Network instability caused by packet loss and TCP connection resets, likely due to misconfigured or overloaded services in the virtual lab environment (Host-Only network + Metasploitable service behavior).
+
+        - What solutions do you recommend? (e.g. use HTTPS, switch to SSH, fix DNS config)
+
+Security Improvements
+•	Replace HTTP with HTTPS to encrypt data transmission. 
+•	Use SSH instead of Telnet/unencrypted services. 
+•	Avoid sending sensitive credentials in plaintext
+
+
